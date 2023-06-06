@@ -1,0 +1,27 @@
+# Exporting Contacts
+# excel_file = r"c:\Users\aleja\Desktop\contact_updates.xlsx"
+
+# data = pandas.read_excel(excel_file)
+
+# df = pandas.DataFrame(data, columns=["name", "lastname", "company", "role", "phone", "email", "country"])
+
+# for ind in df.index:
+#     firstname = df['name'].to_string(index=False)
+#     lastname = df['lastname'].to_string(index=False)
+#     company = df['company'].to_string(index=False)
+#     role = df['role'].to_string(index=False)
+#     phone = df['phone'].to_string(index=False)
+#     email = df['email'].to_string(index=False)
+#     country = df['country'].to_string(index=False)
+#     #print(firstname, lastname, company, role, phone, email, country)    
+#     contact_data = {
+#         "email_address": email,
+#         "first_name": firstname,
+#         "last_name": lastname,
+#         "job_title": role,
+#         "company_name": company,
+#         "phone_number": phone,
+#         "list_memberships": ["97de3134-03db-11ee-9a40-fa163e5fbd10"]
+#     }
+#     add_contact(contact_data)
+
