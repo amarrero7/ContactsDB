@@ -12,7 +12,7 @@ from googleapiclient.errors import HttpError
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 
 # The ID and range of a sample spreadsheet.
-SAMPLE_SPREADSHEET_ID = '1fiGCAXNPJgKu77MngkG0kxFvqwMTjeK7oR1R6i-V4HY'
+SAMPLE_SPREADSHEET_ID = '1IJBGEujMSVd9Ungi2XQQ7EpeI1mf_yz9Xxaed2Prg_E'
 
 
 def main():
@@ -51,8 +51,7 @@ def main():
             return
 
         for row in values:
-            print(row, type(row[0]))
-
+            print(row)
     except HttpError as err:
         print(err)
 
