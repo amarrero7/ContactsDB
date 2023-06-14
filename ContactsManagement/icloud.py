@@ -2,7 +2,7 @@ import pyicloud as pci
 import sys 
 
 #Login
-api = pci.PyiCloudService('alejandromarrero89@gmail.com', 'Colegio8990-', cookie_directory=None)
+api = pci.PyiCloudService('alejandromarrero89@gmail.com', 'None', cookie_directory=None)
 api.authenticate(force_refresh=True)
 
 if api.requires_2fa:
