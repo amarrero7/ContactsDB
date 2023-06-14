@@ -5,7 +5,7 @@ from hubspot.crm.contacts import SimplePublicObjectInput
 from hubspot.crm.contacts.exceptions import ApiException
 
 # API
-api_client = hb.HubSpot(access_token='pat-na1-9112a282-25a9-4f47-886d-c3c4cfeac9e2')
+api_client = hb.HubSpot(access_token='None')
 
 def create_contact(args):
     try:
