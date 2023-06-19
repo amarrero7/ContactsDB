@@ -1,9 +1,8 @@
-import pyicloud as pci
+import pyicloud as pic
 import sys 
 
 #Login
-api = pci.PyiCloudService('alejandromarrero89@gmail.com', 'None', cookie_directory=None)
-api.authenticate(force_refresh=True)
+api = pic.PyiCloudService('jazmin_rodriguez@bioanalytica.com', 'JR12345jr', cookie_directory=None)
 
 if api.requires_2fa:
     print("Two-factor authentication required.")
@@ -44,14 +43,32 @@ elif api.requires_2sa:
         print("Failed to verify verification code")
         sys.exit(1)
 
-# Retrives Contacts and Their Phone Number
+# Retrives Contacts
 def contacts():
     contacts_cont = []
     for c in api.contacts.all():
-        if (c.get('firstName') != None):
-            try:
-                reference = {"name": c.get('firstName'), "phone": c.get('phones')[0]['field'], "email": c.get('emailAddresses')[0]['field']}
-            except:
-                reference = {"name": c.get('firstName'), "phone": c.get('phones')[0]['field'], "email": c.get('emailAddresses')}
-            contacts_cont.append(reference)
+        if ( (c.get('phones') == None and c.get('emailAddresses') == None) and c.get('companyName') == None and c.get('jobTitle')):
+            # try:
+            #     reference = {"name": c.get('firstName'), "phone": c.get('phones')[0]['field'], "email": c.get('emailAddresses')[0]['field']}
+            #     reference = None
+            # except:
+            # reference = {"name": c.get('firstName'), "lastname": c.get('lastName')}
+            reference = f"{c.get('firstName')} {c.get('lastName')}"
+            if reference != None:
+                contacts_cont.append(reference)
+            reference = None
     return contacts_cont
+
+def main():
+    empty_contacts = contacts()
+    with open("contactos_vacios3.txt", 'w', encoding='utf-8') as output:
+        for i in empty_contacts:
+            output.write(i)
+            output.write('\n')
+
+    api.authenticate(force_refresh=True)
+    return 0
+
+# main()
+
+
