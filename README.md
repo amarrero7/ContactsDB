@@ -1,12 +1,9 @@
 # ContactsDB
-Contacts management
+The repository I used while working as a freelance.
+The work consisted of all kinds of things, like web scrapping, managing contacts databases, handling data, managing emails, and more.
 
+# Description
+Personal project with a bunch of scripts that helped me automatize and be more efficient.
 
-# JSON Autorization Response Important Contents
-- device_code = autorization_request.json()['device_code']
-- user_code = autorization_request.json()['user_code']
-- verification_uri = autorization_request.json()['verification_uri']
-- expires_in = autorization_request.json()['expires_in']
-- interval = autorization_request.json()['interval']
-- verification_uri_complete = autorization_request.json()['verification_uri_complete']
-device_code = autorization_request.json()['device_code']
+# Currently in Use
+- YES
