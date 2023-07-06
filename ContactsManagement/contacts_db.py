@@ -1099,7 +1099,7 @@ data = [
     ("horacecox17@yahoo.com", "horace", "", "Ministry Of Public Health Guyana", "Subscribed", "Added by you", "Nov 24, 2021"),
     ("horacio.serrano@upr.edu", "Horacio", "Rivera", "", "Subscribed", "", "Mar 17, 2014"),
     ("hotp@hotpjamaica.com", "", "", "", "Subscribed", "Added by you", "Mar 8, 2023"),
-        ("howard.brown@dpnr.vi.gov", "Howard", "Brown", "Planning and Natural Resources", "Subscribed", "Added by you", "Sep 5, 2017"),
+    ("howard.brown@dpnr.vi.gov", "Howard", "Brown", "Planning and Natural Resources", "Subscribed", "Added by you", "Sep 5, 2017"),
     ("howard.forbes@live.uvi.edu", "Howard", "Forbes", "", "Subscribed", "Added by you", "Sep 3, 2015"),
     ("howard.reid@uwimona.edu.jm", "Howard", "Reid", "UWI Jamaica", "Subscribed", "Added by you", "Jul 30, 2014"),
     ("howarda780@aol.com", "", "", "", "Subscribed", "Added by you", "Mar 8, 2023"),
@@ -1149,5 +1149,4 @@ data = [
     ("imilce.rodriguez1@upr.edu", "Imilce De los Angeles", "Rodriguez Fernandez", "", "Subscribed", "Added by you", "Mar 14, 2022"),
     ("imontes@cccupr.org", "Ingrid", "Montes", "Puerto Rico Omic Center (PROMIC)", "Subscribed", "Added by you", "Sep 5, 2017"),
     ("impa.uasd@gmail.com", "Instituto", "Parasitologia", "Universidad Autónoma De Santo Domingo", "Subscribed", "Added by you", "Jul 30, 2014"),
-    
 ]

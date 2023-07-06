@@ -13,7 +13,7 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
-SCOPES = ['https://www.googleapis.com/auth/gmail.modify', 'https://www.googleapis.com/auth/gmail.metadata', 'https://mail.google.com/', 'https://www.googleapis.com/auth/gmail.readonly']
+SCOPES = ["https://www.googleapis.com/auth/gmail.readonly"]
 
 creds = None
 # The file token.json stores the user's access and refresh tokens, and is
@@ -46,15 +46,25 @@ def get_labels():
         print(label)
 
 def retrieve_messages():
-    page_token = None
+    page_token = "11339957112772947555"
     messages = []
 
+    # Convert the start and end dates to epoch time in seconds
+    start_date = '2019-01-01'
+    end_date = '2020-01-01'
+    start_time = int(datetime.datetime.strptime(start_date, '%Y-%m-%d').timestamp())
+    end_time = int(datetime.datetime.strptime(end_date, '%Y-%m-%d').timestamp())
+
+    # Set the query with the after and before parameters
+    query = f'after:{start_time} before:{end_time}'
+
     while True:
-        response = service.users().messages().list(userId='me', pageToken=page_token).execute()
+        response = service.users().messages().list(userId='me', pageToken=page_token, q=query).execute()
         messages.extend(response.get('messages', []))
         page_token = response.get('nextPageToken')
-        
-        if not page_token or len(messages) == 1000:
+        if not page_token or len(messages) == 1100:
+            with open("next_page_token.txt", 'w') as f:
+                f.write(page_token)
             break
 
     return messages
@@ -109,18 +119,27 @@ def get_start_history_id():
 
 
 def main():
+    print("Retrieving messages...")
     test = retrieve_messages()
-    m_id = test['id']
-    message_data = service.users().messages().get(userId='me', id=m_id, format='metadata').execute()
-    for header in message_data['payload']['headers']:
-        if header['name'] == 'Subject':
-            subject = header['value']
-            if '[FECHA DE DESPACHO' in subject:
-                add_label_to_message(m_id, "Label_6600056462251895626")
-                done = True
-                break
-        if done:
-            break
+    print("Completed")
+    print('----------------------------------\n')
+    emails = []
+    emails_set = set()
+    print("Retrieving emails...")
+    for message in test:
+        message_id = message.get('id')
+        message_data = service.users().messages().get(userId='me', id=message_id, format='metadata').execute()
+        for header in message_data['payload']['headers']:
+            if header['name'] == 'To':
+                emails.extend(header['value'].split(','))
+    print("Completed")
+    print('----------------------------------\n')
+    for email in emails:
+        emails_set.add(email.strip())
+    with open("emails_list_2019_2020.txt", 'w') as f:
+        for e in emails_set:
+            if e.find('@bioanalytica') == -1:
+                f.write(e + '\n')
     
     return 0
 

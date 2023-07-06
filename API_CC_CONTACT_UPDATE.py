@@ -83,30 +83,43 @@ def add_contact(contact_data):
     else:
         print("Error: ", response.json())
 
-# Adds Contacts to "Contactos NO Disponibles (2023)"
-# cwd = os.getcwd()
-# contact_workbook = openpyxl.load_workbook(os.path.join(cwd, "contacts-for-verification.xlsx"))
-# sheet = contact_workbook["contacts-for-verification"]
+def get_all_contacts():
+    headers = {
+        'Authorization': f'Bearer {access_token}',
+        'Content-Type': 'application/json',
+    }
+    url = 'https://api.cc.email/v3/contacts'
+    params = {
+        'create_source': 'Contacts Update',  # Replace with your desired create_source value
+        'limit': 50  # Adjust the limit value as per your needs, up to 500
+    }
+    all_contacts = []
+    while url:
+        response = requests.get(url, headers=headers, params=params)
+        if response.status_code == 200:
+            contacts = response.json().get('contacts', [])
+            all_contacts.extend(contacts)
+            pagination = response.json().get('meta', {}).get('pagination')
+            url = pagination.get('next_link') if pagination and 'next_link' in pagination else None
+        else:
+            print("Error: ", response.json())
+            break
+    with open('cc_contacts_all.txt', 'w') as f:
+        for contact in all_contacts:
+            try:
+                f.write(contact.get('first_name') + " " + contact.get('last_name'))
+                f.write('\n')
+            except:
+                continue
 
-# for i in range(133, 138):
-
-#     email = sheet.cell(row=i, column=1).value
-#     firstname = sheet.cell(row=i, column=2).value
-#     lastname = sheet.cell(row=i, column=3).value
-#     company = sheet.cell(row=i, column=4).value
-#     role = sheet.cell(row=i, column=5).value
-#     country = sheet.cell(row=i, column=20).value
-
-#     contact_data = {
-#         "first_name": firstname,
-#         "last_name": lastname,
-#         "company_name": company,
-#         "job_title": role,
-#         "email_address": email,
-#         "street_address": { "country": country },
-#         "list_memberships": ["5ebf8b86-0567-11ee-95cf-fa163ec0786c"]
-#     }
-#     add_contact(contact_data)
+get_all_contacts()
+# with open('cc_contacts_all.txt', 'w') as f:
+#     for contact in contacts:
+#         try:
+#             f.write(contact.get('first_name') + " " + contact.get('last_name'))
+#             f.write('\n')
+#         except:
+#             continue
 
 # """Accesing the google spreadsheet that contains 
 # all the contacts. Adding them to the Constant Contact.
